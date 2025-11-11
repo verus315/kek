@@ -22,13 +22,18 @@ sudo apt install python3.11 python3.11-venv python3-pip
 sudo apt install git
 ```
 
-### 3. (Optional) Install CUDA for GPU acceleration
+### 3. Install CUDA for GPU acceleration
 
-If you have an NVIDIA GPU and want GPU acceleration:
+Since you have an NVIDIA GPU, you need CUDA installed:
 ```bash
 # Follow NVIDIA's official guide for CUDA installation on Debian
 # https://developer.nvidia.com/cuda-downloads
+
+# Verify installation
+nvidia-smi
 ```
+
+**Note:** This configuration is for GPU users. If you don't have a GPU, edit the installation script to use CPU-only mode.
 
 ## Installation Steps
 
@@ -59,7 +64,7 @@ This script will:
 - Install all required dependencies
 - Set up the application for running
 
-**Note:** The script installs CPU-only ONNX Runtime by default. If you have NVIDIA GPU and CUDA installed, edit the script and uncomment the GPU version line.
+**Note:** The script installs GPU-enabled ONNX Runtime by default (onnxruntime-gpu). If you only have CPU (no NVIDIA GPU), edit the script and switch to the CPU-only version.
 
 ## Running the Application
 
@@ -119,8 +124,10 @@ sudo apt install build-essential libssl-dev libffi-dev python3-dev
 
 If you have NVIDIA GPU but it's not being used:
 1. Verify CUDA installation: `nvidia-smi`
-2. Edit `roop_linux_install.sh` and change `onnxruntime` to `onnxruntime-gpu`
-3. Reinstall: `./roop_linux_install.sh`
+2. Ensure CUDA toolkit and cuDNN are properly installed
+3. Check that `onnxruntime-gpu` was installed (it's the default in the script)
+4. Verify GPU is detected: `python3 -c "import onnxruntime as ort; print(ort.get_available_providers())"`
+   - Should show `CUDAExecutionProvider` in the list
 
 ## Project Information
 

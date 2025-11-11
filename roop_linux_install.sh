@@ -26,11 +26,11 @@ pip install tqdm
 
 echo "Installing requirements..."
 
-# For CPU-only on Linux
-pip install onnxruntime
+# For NVIDIA GPU with CUDA on Linux
+pip install onnxruntime-gpu
 
-# If you have NVIDIA GPU and CUDA, comment out the line above and uncomment this:
-# pip install onnxruntime-gpu
+# If you only have CPU (no GPU), comment out the line above and uncomment this:
+# pip install onnxruntime
 
 # Install other requirements
 pip install -r requirements.txt
